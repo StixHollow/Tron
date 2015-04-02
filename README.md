@@ -1,5 +1,5 @@
 # Tron
-Jeu en ligne de Tron
+Jeu en ligne de Tron en Java
 
 # Projet de programmation
 
