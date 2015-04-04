@@ -8,6 +8,8 @@ public class PlayerConnection extends Thread {
 
 	private TronPlayer infoPlayer;
 	private char nextMove;
+	private int gridwidth = 20;
+	private int gridheight = 20;
 
 	// Info connexion
 	private Socket clientSocket;
@@ -61,7 +63,9 @@ public class PlayerConnection extends Thread {
 			System.out.println(ligneClient + "@" + clientSocket.getInetAddress().getLocalHost().getHostName());
 			
 
-			os.println("hello I am your Server");
+			os.println(gridwidth);
+			os.flush(); 
+			os.println(gridheight);
 			os.flush(); // NE PAS OUBLIER LE FLUSH!
 
 			// boucle sur les commandes du client

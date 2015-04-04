@@ -53,11 +53,16 @@ public class ClientTest {
       System.out.println("attendre la reponse du serveur");
       System.out.flush();
 
+      // reception de la grille
       String answer = in.readLine();
-      System.out.println("Reponse = " + answer);
+      String answer2 = in.readLine();
+      System.out.println("Grille :  " + answer + " x " + answer2);
       System.out.flush();
+      
+      
+      
 
-      if (answer==null || !answer.equals("hello I am your Server")) {
+      if (answer==null) {
         System.out.println("Reponse etrange du serveur: " + answer);
         System.exit(1);
       } else {
