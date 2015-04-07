@@ -81,8 +81,7 @@ public class PlayerConnection extends Thread {
 
 		} catch (IOException e) { // pour TRY PROTOCOLE
 			System.err
-					.println("IOException durant l'interaction avec le client:"
-							+ e);
+					.println("IOException durant l'interaction avec le client:" + e);
 			return;
 		}
 	}
