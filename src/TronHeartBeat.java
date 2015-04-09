@@ -4,23 +4,16 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class PlayerConnection extends Thread {
-
-	private TronPlayer infoPlayer;
-	private char nextMove;
-	private int gridwidth = 0;
-	private int gridheight = 0;
+public class TronHeartBeat extends Thread {
 
 	// Info connexion
 	private Socket clientSocket;
 	private PrintWriter os;
 	private BufferedReader is;
 
-	PlayerConnection(Socket clientSocket, int w, int h) throws ConnectionException {
+	TronHeartBeat(Socket clientSocket) throws ConnectionException {
 		this.clientSocket = clientSocket;
 		try {
-			gridwidth = w;
-			gridheight = h;
 			os = new PrintWriter(clientSocket.getOutputStream());
 			is = new BufferedReader(new InputStreamReader(
 					clientSocket.getInputStream()));
@@ -29,20 +22,7 @@ public class PlayerConnection extends Thread {
 			throw new ConnectionException(e);
 		}
 	}
-
-	protected void finalize() {
-		try {
-			// cleanup
-			os.close();
-			is.close();
-			clientSocket.close();
-		} catch (IOException e) {
-			System.err
-					.println("IOException en fermant les stream et le socket client"
-							+ e);
-		}
-	}
-
+	
 	public void run() {
 		// protocole de communication avec le Client
 		String reception;
@@ -60,12 +40,12 @@ public class PlayerConnection extends Thread {
 
 			String name = reception;
 			String host = clientSocket.getInetAddress().getLocalHost().getHostName();
-			infoPlayer = new TronPlayer(host, name);
 			
-			os.println(gridwidth);
-			os.flush(); 
-			os.println(gridheight);
-			os.flush(); // NE PAS OUBLIER LE FLUSH!
+			
+			//os.println(gridwidth);
+			//os.flush(); 
+			//os.println(gridheight);
+			//os.flush(); // NE PAS OUBLIER LE FLUSH!
 
 			// reception des directions
 			
@@ -73,14 +53,13 @@ public class PlayerConnection extends Thread {
 				//System.out.println("Direction: " + reception);
 				//System.out.flush();
 				
-				if (reception != null){
+				/*if (reception != null){
 					nextMove = reception.charAt(0);
 					infoPlayer.setDirection(reception.charAt(0));
-				}
+				}*/
 				//os.println(new StringBuffer("Merci Client"));
 				//os.flush();
-				System.out.println(infoPlayer.toString());
-				System.out.flush();
+
 			}
 
 			System.out.println("fin normale de la connection client");
@@ -91,5 +70,6 @@ public class PlayerConnection extends Thread {
 			return;
 		}
 	}
+
 
 }

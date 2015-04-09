@@ -59,6 +59,17 @@ public class TronPlayer {
 		Alive = alive;
 	}
 	
-	
+	public String toString(){
+		
+		String line = null;
+		
+		line = "Nom : " + name + "\n";
+		line += "	Hostname : " + hostname + "\n";
+		line += "	Couleur : " + colorPlayer + "\n";
+		line += "	Direction : " + direction + "\n";
+		line += "	En vie : " + Alive + "\n";
+		
+		return line;
+	}
 	
 }

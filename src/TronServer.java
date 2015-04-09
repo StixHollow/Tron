@@ -23,13 +23,16 @@ public class TronServer {
 		int nbPlayers = 0;
 		
 
-		if (args.length != 1) {
+		if (args.length < 3) {
 			System.err.println("Usage: java Serveur <port>");
 			System.exit(0);
 		}
 		
 		int port = Integer.parseInt(args[0]);
-
+		int gridwidth = Integer.parseInt(args[1]);
+		int gridheight = Integer.parseInt(args[2]);
+		
+		
 		try {
 			serverSocket = new ServerSocket(port);
 			System.out.println("Connecté sur le port " + serverSocket.getLocalPort());
@@ -46,9 +49,12 @@ public class TronServer {
 				
 				Socket clientSocket = serverSocket.accept();
 				
-				Players[nbPlayers] = new PlayerConnection(clientSocket);
+				Players[nbPlayers] = new PlayerConnection(clientSocket, gridwidth, gridheight);
 				Players[nbPlayers].start();
+				
 				nbPlayers++;
+				
+				
 				System.out.println("Nombre de joueur : " + nbPlayers);
 				
 				

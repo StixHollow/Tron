@@ -80,14 +80,14 @@ public class ClientTest {
         System.out.print("TYPE A QUERY TO THE SERVER: ");
         userLine = userIn.readLine();
         if (userLine==null) break;
-        System.out.println("->wait for answer from server");
-        System.out.flush();
+        //System.out.println("->wait for answer from server");
+        //System.out.flush();
         out.println(userLine);
         out.flush();
-        answer = in.readLine();
-        System.out.println("ANSWER FROM SERVER: "+answer);
-        System.out.flush();
-      } while (userLine!=null);
+        //answer = in.readLine();
+        //System.out.println("ANSWER FROM SERVER: "+answer);
+        //System.out.flush();
+      } while (true);
 
     }
     catch (IOException e) { // pour TRY PROTOCOLE
