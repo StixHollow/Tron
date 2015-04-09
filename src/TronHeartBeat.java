@@ -3,6 +3,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class TronHeartBeat extends Thread {
 
@@ -28,18 +31,29 @@ public class TronHeartBeat extends Thread {
 		String reception;
 		
 		try { // TRY PROTOCOLE
-
+			
+			//Timer timer = new Timer(1000 * 2, sendMove());
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask() {
+				  @Override
+				  public void run() {
+					  sendMove();
+				  }
+				}, 2000);
+			
+			
+			
 			// verifier que le Client et le Serveur parlent le meme langage
 			reception = is.readLine();
 			if (reception == null) { // on finit le travail anormalement
 				System.err.println("le client n'a pas etabli une connection normale");
 				return;
 			}
-
+			
 			//System.out.println(reception + "@" + clientSocket.getInetAddress().getLocalHost().getHostName());
 
-			String name = reception;
-			String host = clientSocket.getInetAddress().getLocalHost().getHostName();
+			//String name = reception;
+			//String host = clientSocket.getInetAddress().getLocalHost().getHostName();
 			
 			
 			//os.println(gridwidth);
@@ -69,6 +83,10 @@ public class TronHeartBeat extends Thread {
 					.println("IOException durant l'interaction avec le client:" + e);
 			return;
 		}
+	}
+	
+	public void sendMove(){
+		os.println("hello");
 	}
 
 

@@ -24,6 +24,7 @@ public class ClientTest {
     String address = args[0];
 
     try {
+    	
       socket = new Socket(address,port);
       in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       out = new PrintWriter(socket.getOutputStream());

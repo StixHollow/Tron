@@ -10,13 +10,16 @@ public class PlayerConnection extends Thread {
 	private char nextMove;
 	private int gridwidth = 0;
 	private int gridheight = 0;
+	private TronServer server;
 
 	// Info connexion
 	private Socket clientSocket;
 	private PrintWriter os;
 	private BufferedReader is;
+	
 
-	PlayerConnection(Socket clientSocket, int w, int h) throws ConnectionException {
+	PlayerConnection(Socket clientSocket, int w, int h, TronServer s) throws ConnectionException {
+		this.server = s;
 		this.clientSocket = clientSocket;
 		try {
 			gridwidth = w;
@@ -83,7 +86,7 @@ public class PlayerConnection extends Thread {
 				System.out.flush();
 			}
 
-			System.out.println("fin normale de la connection client");
+			//server.removePlayer(); IMPLEMENTER
 
 		} catch (IOException e) { // pour TRY PROTOCOLE
 			System.err
