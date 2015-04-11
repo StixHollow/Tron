@@ -1,18 +1,33 @@
+/**
+ * Classe de structure du profil du joueur
+ * 
+ * @author Leo Marti & Patrice Wilhelmy
+ * @version 0.5.2
+ * @see PlayerConnection.java
+ * @see TronHeartBeat.java
+ */
 
 public class TronPlayer {
 	
-	private String name; 
-	private String hostname;
-	private String colorPlayer;
-	private Trace tracePlayer;
-	private char direction;
-	private boolean Alive;
+	private String name; 			// Nom du joueur
+	private String hostname;		// nom de connection de son ordinateur du le reseau
+	private String colorPlayer;		// couleur du joueur
+	private Trace tracePlayer;		// trace du joueur
+	private char direction;			// direction actuelle du joueur
+	private int posX;				// position du joueur en X
+	private int posY;				// position du joueur en Y
+	private boolean Alive;			// si le joueur est en vie
 	
+	/**
+	 * Constructeur 
+	 * @param host - nom du host du joueur
+	 * @param n - nom du joueur
+	 */
 	public TronPlayer(String host, String n) {
 		
 		name = n;
 		hostname = host;
-		
+		// initialisation du joueur a vivant
 		Alive = true;
 		
 	}
@@ -59,6 +74,29 @@ public class TronPlayer {
 		Alive = alive;
 	}
 	
+	/**
+	 * @return the posX
+	 */
+	public int getPosX() {
+		return posX;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	
+	/**
+	 * toString de la classe affichant son contenu
+	 */
 	public String toString(){
 		
 		String line = null;

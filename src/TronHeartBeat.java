@@ -1,3 +1,12 @@
+/**
+ * Classe de structure du profil du joueur
+ * 
+ * @author Leo Marti & Patrice Wilhelmy
+ * @version 0.5.2
+ * @see PlayerConnection.java
+ * @see TronHeartBeat.java
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -6,88 +15,123 @@ import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 public class TronHeartBeat extends Thread {
 
-	// Info connexion
-	private Socket clientSocket;
-	private PrintWriter os;
-	private BufferedReader is;
+	// serveur principal 
+	private TronServer server;
+	
+	private int nbConnexion;		// nombre du joueur connecter
+	private int nbPlayerAlive;		// nombre du joueur vivant
+	
+	private boolean party;			// statut de la partie
+	
+	private PrintWriter[] os;		// stream d'envoie
 
-	TronHeartBeat(Socket clientSocket) throws ConnectionException {
-		this.clientSocket = clientSocket;
+	TronHeartBeat(TronServer s) throws ConnectionException {
+		
+		// initialisation des variables
+		this.server = s;
+		nbConnexion = 0;
+		nbPlayerAlive = 0;
+		party = false;
+	}
+	
+	/**
+	 * Ajout d'un nouveau joueur au coeur du serveurs
+	 * @param clientSocket - socket du clients
+	 * @return true - All Right ! || false - Good luck
+	 * @throws ConnectionException
+	 */
+	public boolean addNewPlayer(Socket clientSocket) throws ConnectionException {
+
+		// valeur de retour
+		boolean chkConnection = false;
+
 		try {
-			os = new PrintWriter(clientSocket.getOutputStream());
-			is = new BufferedReader(new InputStreamReader(
-					clientSocket.getInputStream()));
+			//creation d'un stream pour le joueur
+			os[nbConnexion] = new PrintWriter(clientSocket.getOutputStream());
+			// augmentation du nombre de joueurs et de vivants
+			nbConnexion++;
+			nbPlayerAlive++;
+			// tout fonctionne
+			chkConnection = true;
+
 		} catch (IOException e) {
-			System.err.println("Exception en ouvrant les streams du client: " + e);
+			System.err.println("Exception en ouvrant les streams du client: "
+					+ e);
 			throw new ConnectionException(e);
 		}
+
+		return chkConnection;
+
 	}
-	
+
+	/**
+	 * Lancement du serveur
+	 */
 	public void run() {
-		// protocole de communication avec le Client
-		String reception;
 		
-		try { // TRY PROTOCOLE
+		// attante que 2 joueur au minimum soit connectes
+		while (nbConnexion < 2){
 			
-			//Timer timer = new Timer(1000 * 2, sendMove());
-			Timer timer = new Timer();
-			timer.schedule(new TimerTask() {
-				  @Override
-				  public void run() {
-					  sendMove();
-				  }
-				}, 2000);
-			
-			
-			
-			// verifier que le Client et le Serveur parlent le meme langage
-			reception = is.readLine();
-			if (reception == null) { // on finit le travail anormalement
-				System.err.println("le client n'a pas etabli une connection normale");
-				return;
+			try {
+			    Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			    e.printStackTrace();
 			}
 			
-			//System.out.println(reception + "@" + clientSocket.getInetAddress().getLocalHost().getHostName());
-
-			//String name = reception;
-			//String host = clientSocket.getInetAddress().getLocalHost().getHostName();
-			
-			
-			//os.println(gridwidth);
-			//os.flush(); 
-			//os.println(gridheight);
-			//os.flush(); // NE PAS OUBLIER LE FLUSH!
-
-			// reception des directions
-			
-			while ((reception = is.readLine()) != null) {
-				//System.out.println("Direction: " + reception);
-				//System.out.flush();
+		}
+		
+		// lancement de la partie
+		startParty();
+		
+		// creation du tick horloge
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
 				
-				/*if (reception != null){
-					nextMove = reception.charAt(0);
-					infoPlayer.setDirection(reception.charAt(0));
-				}*/
-				//os.println(new StringBuffer("Merci Client"));
-				//os.flush();
-
+				
+				if (party){
+					sendMove();
+					
+				}
+				
+				
 			}
+		}, 2000);
 
-			System.out.println("fin normale de la connection client");
+	}
 
-		} catch (IOException e) { // pour TRY PROTOCOLE
-			System.err
-					.println("IOException durant l'interaction avec le client:" + e);
-			return;
+	/**
+	 * Envoi des mouvement aux joueurs
+	 */
+	public void sendMove() {
+		// ligne d'envoi
+		String d = "";
+		
+		// formatage de la ligne d'envoi
+		for (int i = 0; i <= nbConnexion; i++) {
+			if (server.getPlayer(i).getInfoPlayer().isAlive()){
+				d += String.valueOf(server.getPlayer(i).getInfoPlayer().getDirection());
+			} else {
+				d += "X";
+				nbPlayerAlive -= 1;
+			}
+		}
+		
+		// envoi des positions a l'ensemble des joueur
+		for (int i = 0; i <= nbConnexion; i++) {
+			os[i].println("s" + d);
+			os[i].flush();
 		}
 	}
 	
-	public void sendMove(){
-		os.println("hello");
+	/**
+	 * Lancement de la partie
+	 */
+	public void startParty(){
+		party = true;
 	}
-
 
 }
