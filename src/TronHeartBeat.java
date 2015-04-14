@@ -46,7 +46,9 @@ public class TronHeartBeat extends Thread {
 
 		// valeur de retour
 		boolean chkConnection = false;
-
+		
+		os = new PrintWriter[10];
+		
 		try {
 			//creation d'un stream pour le joueur
 			os[nbConnexion] = new PrintWriter(clientSocket.getOutputStream());
@@ -113,6 +115,7 @@ public class TronHeartBeat extends Thread {
 		// formatage de la ligne d'envoi
 		for (int i = 0; i <= nbConnexion; i++) {
 			if (server.getPlayer(i).getInfoPlayer().isAlive()){
+				// recuperation et transformation du char direction en string
 				d += String.valueOf(server.getPlayer(i).getInfoPlayer().getDirection());
 			} else {
 				d += "X";

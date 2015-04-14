@@ -16,6 +16,7 @@ import java.net.Socket;
 public class PlayerConnection extends Thread {
 
 	private TronPlayer infoPlayer;			// Profil du joueur
+	private int idPlayer;
 	private char nextMove;					// mouvement suivant du joueur
 	
 	// taille de la grille de jeu
@@ -32,13 +33,14 @@ public class PlayerConnection extends Thread {
 	private TronServer server;
 	
 
-	PlayerConnection(Socket clientSocket, int w, int h, TronServer s) throws ConnectionException {
+	PlayerConnection(Socket clientSocket, int w, int h, int id, TronServer s) throws ConnectionException {
 		
 		// initialisation des variables
 		this.server = s;
 		this.clientSocket = clientSocket;
 		this.gridwidth = w;
 		this.gridheight = h;
+		this.idPlayer = id;
 		
 		try {
 			// Creation des Streams du jeu
@@ -150,16 +152,19 @@ public class PlayerConnection extends Thread {
 	/**
 	 * Envoi des données du dernier joueur au client
 	 */
-	public void sendPlayerInfo(){
-		os.println("+" + server.getPlayer(server.getNbPlayers()).getInfoPlayer().getName());
+	public void sendLastPlayerInfo(){
+		
+		int nb = server.getNbPlayers() -1;
+		
+		os.println("+" + server.getPlayer(nb).getInfoPlayer().getName());
 		os.flush(); 
-		os.println(server.getPlayer(server.getNbPlayers()).getInfoPlayer().getHostname());
+		os.println(server.getPlayer(nb).getInfoPlayer().getHostname());
 		os.flush(); 
-		os.println(server.getPlayer(server.getNbPlayers()).getInfoPlayer().getColorPlayer());
+		os.println(server.getPlayer(nb).getInfoPlayer().getColorPlayer());
 		os.flush(); 
-		os.println(server.getPlayer(server.getNbPlayers()).getInfoPlayer().getPosX());
+		os.println(server.getPlayer(nb).getInfoPlayer().getPosX());
 		os.flush(); 
-		os.println(server.getPlayer(server.getNbPlayers()).getInfoPlayer().getPosY());
+		os.println(server.getPlayer(nb).getInfoPlayer().getPosY());
 		os.flush(); 
 	}
 	
@@ -168,7 +173,7 @@ public class PlayerConnection extends Thread {
 	 */
 	public void notifyAllPlayer(){
 		for (int i = 0; i <= server.getNbPlayers()-1; i++){
-			server.getPlayer(i).sendPlayerInfo();
+			server.getPlayer(i).sendLastPlayerInfo();
 			
 		}
 	}

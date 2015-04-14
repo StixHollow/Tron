@@ -128,7 +128,7 @@ public class TronServer {
 	 */
 	public void addPLayer(Socket clientSocket) throws ConnectionException {
 		// creation d'une nouvelle connection
-		Players[nbPlayers] = new PlayerConnection(clientSocket, gridwidth, gridheight, this);
+		Players[nbPlayers] = new PlayerConnection(clientSocket, gridwidth, gridheight, nbPlayers, this);
 		Players[nbPlayers].start();
 		
 		// incrementation du nombre de joueur
