@@ -13,7 +13,7 @@ public class TronPlayer {
 	private String hostname;		// nom de connection de son ordinateur du le reseau
 	private String colorPlayer;		// couleur du joueur
 	private Trace tracePlayer;		// trace du joueur
-	private char direction;			// direction actuelle du joueur
+	private String direction;			// direction actuelle du joueur
 	private int posX;				// position du joueur en X
 	private int posY;				// position du joueur en Y
 	private boolean Alive;			// si le joueur est en vie
@@ -61,10 +61,10 @@ public class TronPlayer {
 	public void setTracePlayer(Trace tracePlayer) {
 		this.tracePlayer = tracePlayer;
 	}
-	public char getDirection() {
+	public String getDirection() {
 		return direction;
 	}
-	public void setDirection(char direction) {
+	public void setDirection(String direction) {
 		this.direction = direction;
 	}
 	public boolean isAlive() {

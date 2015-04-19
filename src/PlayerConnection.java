@@ -64,9 +64,7 @@ public class PlayerConnection extends Thread {
 			is.close();
 			clientSocket.close();
 		} catch (IOException e) {
-			System.err
-					.println("IOException en fermant les stream et le socket client"
-							+ e);
+			System.err.println("IOException en fermant les stream et le socket client" + e);
 		}
 	}
 
@@ -83,7 +81,6 @@ public class PlayerConnection extends Thread {
 			reception = is.readLine();
 			if (reception == null) { // on finit le travail anormalement
 				System.err.println("le client n'a pas etabli une connection normale");
-				return;
 			}
 
 			//System.out.println(reception + "@" + clientSocket.getInetAddress().getLocalHost().getHostName());
@@ -92,6 +89,7 @@ public class PlayerConnection extends Thread {
 			String name = reception;
 			String host = clientSocket.getInetAddress().getLocalHost().getHostName();
 			infoPlayer = new TronPlayer(host, name);
+			infoPlayer.setDirection("B");
 			
 			// envoi des dimension la grille de jeu
 			os.println(gridwidth);
@@ -111,7 +109,7 @@ public class PlayerConnection extends Thread {
 				// Mise a jour des directions
 				if (reception != null){
 					nextMove = reception.charAt(0);
-					infoPlayer.setDirection(reception.charAt(0));
+					infoPlayer.setDirection(reception.substring(0, 1));
 				}
 				
 				// affichage des données du joueur

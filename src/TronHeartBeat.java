@@ -22,18 +22,22 @@ public class TronHeartBeat extends Thread {
 	
 	private int nbConnexion;		// nombre du joueur connecter
 	private int nbPlayerAlive;		// nombre du joueur vivant
+	private int clocktick;
 	
 	private boolean party;			// statut de la partie
 	
 	private PrintWriter[] os;		// stream d'envoie
 
-	TronHeartBeat(TronServer s) throws ConnectionException {
+	TronHeartBeat(TronServer s, int ct) throws ConnectionException {
 		
 		// initialisation des variables
 		this.server = s;
+		clocktick = ct;
 		nbConnexion = 0;
 		nbPlayerAlive = 0;
 		party = false;
+		
+		os = new PrintWriter[10];
 	}
 	
 	/**
@@ -43,13 +47,12 @@ public class TronHeartBeat extends Thread {
 	 * @throws ConnectionException
 	 */
 	public boolean addNewPlayer(Socket clientSocket) throws ConnectionException {
-
+		
 		// valeur de retour
 		boolean chkConnection = false;
 		
-		os = new PrintWriter[10];
-		
 		try {
+
 			//creation d'un stream pour le joueur
 			os[nbConnexion] = new PrintWriter(clientSocket.getOutputStream());
 			// augmentation du nombre de joueurs et de vivants
@@ -59,8 +62,7 @@ public class TronHeartBeat extends Thread {
 			chkConnection = true;
 
 		} catch (IOException e) {
-			System.err.println("Exception en ouvrant les streams du client: "
-					+ e);
+			System.err.println("Exception en ouvrant les streams du client: " + e);
 			throw new ConnectionException(e);
 		}
 
@@ -86,13 +88,11 @@ public class TronHeartBeat extends Thread {
 		
 		// lancement de la partie
 		startParty();
-		
 		// creation du tick horloge
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				
 				
 				if (party){
 					sendMove();
@@ -101,7 +101,7 @@ public class TronHeartBeat extends Thread {
 				
 				
 			}
-		}, 2000);
+		}, 0, clocktick);
 
 	}
 
@@ -113,21 +113,25 @@ public class TronHeartBeat extends Thread {
 		String d = "";
 		
 		// formatage de la ligne d'envoi
-		for (int i = 0; i <= nbConnexion; i++) {
+		for (int i = 0; i < nbConnexion; i++) {
+			
 			if (server.getPlayer(i).getInfoPlayer().isAlive()){
 				// recuperation et transformation du char direction en string
-				d += String.valueOf(server.getPlayer(i).getInfoPlayer().getDirection());
+				d = d + String.valueOf(server.getPlayer(i).getInfoPlayer().getDirection());
 			} else {
-				d += "X";
+				d = d + "X";
 				nbPlayerAlive -= 1;
 			}
 		}
-		
+		System.out.println("s" + d);
 		// envoi des positions a l'ensemble des joueur
-		for (int i = 0; i <= nbConnexion; i++) {
+		for (int i = 0; i < nbConnexion; i++) {
 			os[i].println("s" + d);
 			os[i].flush();
+			
 		}
+		
+		
 	}
 	
 	/**

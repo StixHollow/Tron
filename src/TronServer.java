@@ -22,8 +22,10 @@ public class TronServer {
 	// Taille de la grille de jeu
 	int gridwidth;
 	int gridheight;
+	
+	int clocktick;
 
-	public static void main(String[] args) throws ConnectionException {
+	public static void main(String[] args) throws ConnectionException, UnknownHostException {
 
 		// test si l'ensemble des parametres sont present
 		// A CORRIGER
@@ -34,20 +36,22 @@ public class TronServer {
 
 		// parse de args
 		int port = Integer.parseInt(args[0]);
-		int gridwidth = Integer.parseInt(args[1]);
-		int gridheight = Integer.parseInt(args[2]);
+		
 
 		// initialisation du serveur
 		TronServer server = new TronServer();
 
 		// Creation du serveur
 		if (server.creatServer(port)) {
-			System.out.println("Connecté sur le port "
-					+ server.getServerSocket().getLocalPort());
+			System.out.println("Connecté @" + InetAddress.getLocalHost().getHostName() + ":"  + server.getServerSocket().getLocalPort());
 		} else {
 			System.exit(1);
 		}
 
+		server.setGridwidth(Integer.parseInt(args[2]));
+		server.setGridheight(Integer.parseInt(args[3]));
+		server.setClocktick(Integer.parseInt(args[1]));
+		
 		// Lancement du serveur
 		server.run(server);
 
@@ -61,7 +65,8 @@ public class TronServer {
 	public void run(TronServer server) throws ConnectionException {
 		
 		// Lancement du coeur du serveur
-		TronHeartBeat heart = new TronHeartBeat(server);
+		TronHeartBeat heart = new TronHeartBeat(server, getClocktick());
+		heart.start();
 		
 		// boucle de connection des clients
 		while (true) {
@@ -113,8 +118,7 @@ public class TronServer {
 			success = true;
 
 		} catch (IOException e) {
-			System.err.println("Exception: impossible de creer ServerSocket: "
-					+ e);
+			System.err.println("Exception: impossible de creer ServerSocket: " + e);
 		}
 		
 		// renvoi de la reussite ou non de la creation du serveur
@@ -173,6 +177,20 @@ public class TronServer {
 
 	public void setServerSocket(ServerSocket serverSocket) {
 		this.serverSocket = serverSocket;
+	}
+
+	/**
+	 * @return the clocktick
+	 */
+	public int getClocktick() {
+		return clocktick;
+	}
+
+	/**
+	 * @param clocktick the clocktick to set
+	 */
+	public void setClocktick(int clocktick) {
+		this.clocktick = clocktick;
 	}
 
 }

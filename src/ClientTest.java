@@ -65,7 +65,7 @@ public class ClientTest {
       do {
     	  answer = in.readLine();
     	  if (answer.substring(0, 1).equals("+")) {
-    		  PlayerArrive = 4;
+    		  PlayerArrive = 5;
     	  }
     	  System.out.println(answer);
     	  PlayerArrive -= 1;
@@ -88,7 +88,9 @@ public class ClientTest {
       String userLine;
 
       do {
-        System.out.print("TYPE A QUERY TO THE SERVER: ");
+    	answer = in.readLine();
+        System.out.println(answer);
+        /*
         userLine = userIn.readLine();
         if (userLine==null) break;
         //System.out.println("->wait for answer from server");
@@ -97,7 +99,7 @@ public class ClientTest {
         out.flush();
         //answer = in.readLine();
         //System.out.println("ANSWER FROM SERVER: "+answer);
-        //System.out.flush();
+        //System.out.flush();*/
       } while (true);
 
     }
