@@ -27,6 +27,7 @@ public class ClientTest {
     String address = args[0];
 
     try {
+    	
       socket = new Socket(address,port);
       in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       out = new PrintWriter(socket.getOutputStream());
@@ -45,8 +46,6 @@ public class ClientTest {
 
       System.out.println("Socket au serveur etablie");
 
-      System.out.println("envoyer message d'identification au serveur");
-      System.out.flush();
 
       // protocole pour verifier que Client et Serveur sont compatibles
       out.println(System.getProperty("user.name"));
@@ -57,11 +56,23 @@ public class ClientTest {
       System.out.flush();
 
       // reception de la grille
+      
+      
       String answer = in.readLine();
       String answer2 = in.readLine();
       System.out.println("Grille :  " + answer + " x " + answer2);
       System.out.flush();
       
+      int PlayerArrive = 0;
+      
+      do {
+    	  answer = in.readLine();
+    	  if (answer.substring(0, 1).equals("+")) {
+    		  PlayerArrive = 5;
+    	  }
+    	  System.out.println(answer);
+    	  PlayerArrive -= 1;
+      } while (PlayerArrive != 0);
       
       
 
@@ -80,17 +91,19 @@ public class ClientTest {
       String userLine;
 
       do {
-        System.out.print("TYPE A QUERY TO THE SERVER: ");
+    	answer = in.readLine();
+        System.out.println(answer);
+        /*
         userLine = userIn.readLine();
         if (userLine==null) break;
-        System.out.println("->wait for answer from server");
-        System.out.flush();
+        //System.out.println("->wait for answer from server");
+        //System.out.flush();
         out.println(userLine);
         out.flush();
-        answer = in.readLine();
-        System.out.println("ANSWER FROM SERVER: "+answer);
-        System.out.flush();
-      } while (userLine!=null);
+        //answer = in.readLine();
+        //System.out.println("ANSWER FROM SERVER: "+answer);
+        //System.out.flush();*/
+      } while (true);
 
     }
     catch (IOException e) { // pour TRY PROTOCOLE
