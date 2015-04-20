@@ -9,6 +9,9 @@ import java.net.*;
 
 public class ClientTest {
 
+	public ClientTest(){
+		
+	}
   public static void main(String[] args) {
     Socket socket=null;
     BufferedReader in=null;

@@ -1,9 +1,11 @@
+import java.awt.Color;
+
 
 public class TronPlayer {
 	
 	private String name; 
 	private String hostname;
-	private String colorPlayer;
+	private Color colorPlayer;
 	private Trace tracePlayer;
 	private char direction;
 	private boolean Alive;
@@ -34,10 +36,10 @@ public class TronPlayer {
 	public void setHostname(String hostname) {
 		this.hostname = hostname;
 	}
-	public String getColorPlayer() {
+	public Color getColorPlayer() {
 		return colorPlayer;
 	}
-	public void setColorPlayer(String colorPlayer) {
+	public void setColorPlayer(Color colorPlayer) {
 		this.colorPlayer = colorPlayer;
 	}
 	public Trace getTracePlayer() {
