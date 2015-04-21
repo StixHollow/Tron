@@ -19,14 +19,21 @@ public class TronServer {
 	// socket contenant le serveur
 	ServerSocket serverSocket = null;
 
-	// Taille de la grille de jeu
+	static // Taille de la grille de jeu
 	int gridwidth;
-	int gridheight;
+	static int gridheight;
 	
 	int clocktick;
-
+	
+	//grille virtuel du jeu
+	static int[][] grille;
+	
 	public static void main(String[] args) throws ConnectionException, UnknownHostException {
 
+
+		
+		grille = new int[gridwidth][gridheight];
+		
 		// test si l'ensemble des parametres sont present
 		// A CORRIGER
 		if (args.length < 3) {
@@ -170,7 +177,13 @@ public class TronServer {
 	public void setGridheight(int gridheight) {
 		this.gridheight = gridheight;
 	}
+	public int[][] getGrille() {
+		return grille;
+	}
 
+	public void setGrille(int x, int y, int valeur) {
+		this.grille[x][y] = valeur;
+	}
 	public ServerSocket getServerSocket() {
 		return serverSocket;
 	}

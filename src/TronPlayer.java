@@ -1,16 +1,7 @@
-<<<<<<< HEAD
+
 import java.awt.Color;
+import java.util.Random;
 
-
-public class TronPlayer {
-	
-	private String name; 
-	private String hostname;
-	private Color colorPlayer;
-	private Trace tracePlayer;
-	private char direction;
-	private boolean Alive;
-=======
 /**
  * Classe de structure du profil du joueur
  * 
@@ -24,28 +15,44 @@ public class TronPlayer {
 	
 	private String name; 			// Nom du joueur
 	private String hostname;		// nom de connection de son ordinateur du le reseau
-	private String colorPlayer;		// couleur du joueur
+	private Color colorPlayer;		// couleur du joueur
 	private Trace tracePlayer;		// trace du joueur
 	private String direction;			// direction actuelle du joueur
 	private int posX;				// position du joueur en X
 	private int posY;				// position du joueur en Y
 	private boolean Alive;			// si le joueur est en vie
->>>>>>> origin/master
-	
+
 	/**
 	 * Constructeur 
 	 * @param host - nom du host du joueur
 	 * @param n - nom du joueur
 	 */
-	public TronPlayer(String host, String n) {
+	public TronPlayer(String host, String n, int[][] grille) {
+		//Genere le point de depart
+		boolean temp = true;
+		int randx = 0;
+		int randy = 0;
+		while(temp){
+		Random r1 = new Random();
+		Random r2 = new Random();
 		
+		randx = r1.nextInt(grille.length - 10)+10;
+		randy = r2.nextInt(grille[0].length - 10)+10;
+		if(grille[randx][randy] == 0){
+			temp = !temp;
+		}
+			
+		}
+		posX = randx;
+		posY = randy;
 		name = n;
 		hostname = host;
 		// initialisation du joueur a vivant
 		Alive = true;
 		
+		tracePlayer = new Trace(this, new Point(posX, posY, grille));
+		
 	}
-	
 	
 	/*
 	 * Getter et Setter
