@@ -1,8 +1,14 @@
-
+/**
+ * Classe de structure des points du trace
+ * 
+ * @author Leo Marti & Patrice Wilhelmy
+ * @version 1.0
+ * @see Trace.java
+ */
 public class Point {
 
-	protected int x;
-	protected int y;
+	protected int x; // position en x
+	protected int y; // position en y
 	
 	public Point (int x, int y){
 		this.x = x;

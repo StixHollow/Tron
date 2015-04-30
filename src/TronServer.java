@@ -2,7 +2,7 @@
  * Classe de gestion du serveur du jeu Tron
  * 
  * @author Leo Marti & Patrice Wilhelmy
- * @version 0.5.2
+ * @version 1.0
  * @see PlayerConnection.java
  * @see TronHeartBeat.java
  */
@@ -84,6 +84,7 @@ public class TronServer {
 		// Lancement du coeur du serveur
 		TronHeartBeat heart = new TronHeartBeat(server, getClocktick());
 		heart.start();
+		
 		
 		// boucle de connection des clients
 		while (true) {

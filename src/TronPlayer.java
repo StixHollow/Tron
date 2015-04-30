@@ -1,15 +1,15 @@
 
-import java.awt.Color;
-import java.util.Random;
-
 /**
  * Classe de structure du profil du joueur
  * 
  * @author Leo Marti & Patrice Wilhelmy
- * @version 0.5.2
+ * @version 1.0
  * @see PlayerConnection.java
  * @see TronHeartBeat.java
  */
+
+import java.awt.Color;
+import java.util.Random;
 
 public class TronPlayer {
 	
@@ -28,23 +28,8 @@ public class TronPlayer {
 	 * @param n - nom du joueur
 	 */
 	public TronPlayer(String host, String n, int[][] grille) {
-		//Genere le point de depart
-		boolean temp = true;
-		int randx = 0;
-		int randy = 0;
-		while(temp){
-		Random r1 = new Random();
-		Random r2 = new Random();
 		
-		randx = r1.nextInt(grille.length - 10)+10;
-		randy = r2.nextInt(grille[0].length - 10)+10;
-		if(grille[randx][randy] == 0){
-			temp = !temp;
-		}
-			
-		}
-		posX = randx;
-		posY = randy;
+		setNewPosition(grille);
 		name = n;
 		hostname = host;
 		// initialisation du joueur a vivant
@@ -114,6 +99,25 @@ public class TronPlayer {
 		this.posY = posY;
 	}
 
+	public void setNewPosition(int[][] grille){
+		//Genere le point de depart
+				boolean temp = true;
+				int randx = 0;
+				int randy = 0;
+				while (temp) {
+					Random r1 = new Random();
+					Random r2 = new Random();
+
+					randx = r1.nextInt(grille.length - 10) + 10;
+					randy = r2.nextInt(grille[0].length - 10) + 10;
+					if (grille[randx][randy] == 0) {
+						temp = !temp;
+					}
+
+				}
+				posX = randx;
+				posY = randy;
+	}
 	
 	/**
 	 * toString de la classe affichant son contenu

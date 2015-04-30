@@ -1,3 +1,10 @@
+/**
+ * Classe de structure de la trace de chaque joueurs
+ * 
+ * @author Leo Marti & Patrice Wilhelmy
+ * @version 1.0
+ * @see Point.java
+ */
 import java.util.*;
 
 public class Trace {
@@ -15,7 +22,10 @@ public class Trace {
 		listePt.add(pt);
 	}
 	
-	
+	/**
+	 * deplace la trace du joueur
+	 * @param direction
+	 */
 	public void allonge(char direction){
 		Point temp = new Point (listePt.get(indexListePt-1).getX(),listePt.get(indexListePt-1).getY());
 		
@@ -31,6 +41,10 @@ public class Trace {
 		indexListePt++;
 	}
 	
+	/**
+	 * test si la tete heurte la trace
+	 * @return boolean - true | false
+	 */
 	public boolean ramTrace(){
 		boolean r = false;
 		
@@ -44,10 +58,16 @@ public class Trace {
 		return r;
 	}
 	
+	/**
+	 * Test si un point precis touche la trace
+	 * @param p - point en question
+	 * @return bool : true | false
+	 */
 	public boolean thisPointRamTrace(Point p){
 		boolean r = false;
 		
 		// getIndexListPt-1 pour ne pas reprendre en compte la tete que l'on compare
+		// pour chaque partie
 		for (int i=0; i < getIndexListePt()-1; i++){
 			if (p.equals(getPointOf(i))){
 				r = true;

@@ -2,7 +2,7 @@
  * Classe thread des connections avec le joueur
  * 
  * @author Leo Marti & Patrice Wilhelmy
- * @version 0.5
+ * @version 1.0
  * @see TronServer.java
  * @see TronHeartBeat.java
  */
@@ -179,6 +179,9 @@ public class PlayerConnection extends Thread {
 		}
 	}
 	
+	/**
+	 * deplace le joueur avec la nouvelle direction
+	 */
 	public void movePlayer(){
 		infoPlayer.getTracePlayer().allonge(infoPlayer.getDirection().charAt(0));
 	}
