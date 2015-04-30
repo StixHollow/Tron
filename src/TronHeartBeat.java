@@ -95,6 +95,7 @@ public class TronHeartBeat extends Thread {
 			public void run() {
 				
 				if (party){
+					whoIsAlive();
 					sendMove();
 					
 				}
@@ -103,6 +104,29 @@ public class TronHeartBeat extends Thread {
 			}
 		}, 0, clocktick);
 
+	}
+	
+	public void whoIsAlive(){
+		
+		TronPlayer p;
+		TronPlayer otherP;
+		
+		for (int i=0; i < nbConnexion; i++){
+			p = server.getPlayer(i).getInfoPlayer();
+			/* if (p.getTracePlayer().ramTrace()){
+				server.getPlayer(i).getInfoPlayer().setAlive(false);
+			} */
+			
+			// logiquement si on repasse sur tous les joueurs on reprend le joueur en cours en compte
+			for (int k=0; k < nbConnexion; k++){
+				otherP = server.getPlayer(i).getInfoPlayer();
+				if (otherP.getTracePlayer().thisPointRamTrace(p.getTracePlayer().getLastPoint())){
+					server.getPlayer(i).getInfoPlayer().setAlive(false);
+				}
+			}
+			
+		}
+		
 	}
 
 	/**

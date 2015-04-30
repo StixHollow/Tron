@@ -11,7 +11,7 @@ public class testArenaLocal {
 	
 	static int grille[][]=new int[100][100];
 	
-	
+	// Oublie pas que c'est le serveur qui t'envoi la position de départ
 	private static TronPlayer player1 = new TronPlayer("bleh", "pat", grille);
 	private static TronPlayer player2 = new TronPlayer("bleh", "leo", grille);
 	private static JAreneTron arene = new JAreneTron(100,100,tab);

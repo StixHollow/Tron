@@ -16,6 +16,22 @@ public class Point {
 		grille[x][y] = 0;
 	}
 	
+	
+	
+
+	
+	/* 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	public boolean equals(Point p) {
+		
+		if (p.getX() == this.x && p.getY() == this.y){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	//Get 
 	
 	public int getX(){

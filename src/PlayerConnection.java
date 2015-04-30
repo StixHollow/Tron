@@ -22,7 +22,6 @@ public class PlayerConnection extends Thread {
 	// taille de la grille de jeu
 	private int gridwidth = 0;				
 	private int gridheight = 0;
-	
 
 	
 	
@@ -92,7 +91,8 @@ public class PlayerConnection extends Thread {
 			String name = reception;
 			String host = clientSocket.getInetAddress().getLocalHost().getHostName();
 			infoPlayer = new TronPlayer(host, name, server.getGrille());
-			infoPlayer.setDirection("B");
+			infoPlayer.setDirection("N");
+			//infoPlayer.
 			
 			// envoi des dimension la grille de jeu
 			os.println(gridwidth);
@@ -177,6 +177,10 @@ public class PlayerConnection extends Thread {
 			server.getPlayer(i).sendLastPlayerInfo();
 			
 		}
+	}
+	
+	public void movePlayer(){
+		infoPlayer.getTracePlayer().allonge(infoPlayer.getDirection().charAt(0));
 	}
 
 	/*

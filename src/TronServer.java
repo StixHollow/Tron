@@ -37,30 +37,40 @@ public class TronServer {
 		// test si l'ensemble des parametres sont present
 		// A CORRIGER
 		if (args.length < 3) {
-			System.err.println("Usage: java Serveur <port>");
+			errorMessage(105);
 			System.exit(0);
 		}
 
 		// parse de args
-		int port = Integer.parseInt(args[0]);
 		
-
-		// initialisation du serveur
-		TronServer server = new TronServer();
-
-		// Creation du serveur
-		if (server.creatServer(port)) {
-			System.out.println("Connecté @" + InetAddress.getLocalHost().getHostName() + ":"  + server.getServerSocket().getLocalPort());
+		if (isInt(args[0])){
+			int port = Integer.parseInt(args[0]);
+		
+			// initialisation du serveur
+			TronServer server = new TronServer();
+	
+			// Creation du serveur
+			if (server.creatServer(port)) {
+				System.out.println("Connecté @" + InetAddress.getLocalHost().getHostName() + ":"  + server.getServerSocket().getLocalPort());
+			} else {
+				System.exit(1);
+			}
+			
+			
+			if (isInt(args[1]) || isInt(args[2]) || isInt(args[3])){
+				server.setGridwidth(Integer.parseInt(args[2]));
+				server.setGridheight(Integer.parseInt(args[3]));
+				server.setClocktick(Integer.parseInt(args[1]));
+			} else {
+				errorMessage(100);
+			}
+		
+		
+			// Lancement du serveur
+			server.run(server);
 		} else {
-			System.exit(1);
+			errorMessage(100);
 		}
-
-		server.setGridwidth(Integer.parseInt(args[2]));
-		server.setGridheight(Integer.parseInt(args[3]));
-		server.setClocktick(Integer.parseInt(args[1]));
-		
-		// Lancement du serveur
-		server.run(server);
 
 	}
 
@@ -101,9 +111,7 @@ public class TronServer {
 				System.exit(1);
 
 			} catch (ConnectionException e) {
-				System.err
-						.println("Exception lancee pendant la construction de la connection: "
-								+ e);
+				System.err.println("Exception lancee pendant la construction de la connection: " + e);
 				System.exit(1);
 			}
 		}
@@ -204,6 +212,46 @@ public class TronServer {
 	 */
 	public void setClocktick(int clocktick) {
 		this.clocktick = clocktick;
+	}
+	
+	/**
+	 * errorMessage
+	 * @param c - message code
+	 */
+	public static void errorMessage(int c) {
+		
+		String m = "";
+		
+		switch (c) {
+        case 100:  m = "Parametre invalide. \n TronServer <serverport> <clocktick> <gridwidth> <gridheight> ";
+                 break;
+        case 105:  m = "Nombre d'argument invalide. \n TronServer <serverport> <clocktick> <gridwidth> <gridheight> ";
+        break;         
+                 
+        default: m = "Invalid err";
+                 break;
+		}
+		System.err.println(m);
+	}
+	
+	
+	/**
+	 * Test si le string est convertible en int 
+	 * 
+	 * @author Leo Marti & Anonymous - http://www.commentcamarche.net/forum/affich
+	 * 									-499267-convert-string-to-int-in-java
+	 * @param i - string à tester
+	 * @return bool
+	 */
+	public static boolean isInt(String i) {
+		try {
+			Integer.parseInt(i);
+
+		} catch (NumberFormatException e) {
+			return false;
+		}
+
+		return true;
 	}
 
 }

@@ -29,7 +29,42 @@ public class Trace {
 		listePt.add(temp);
 	}
 	
+	public boolean ramTrace(){
+		boolean r = false;
+		
+		for (int j=0; j < getIndexListePt(); j++){
+			if (getLastPoint().equals(getPointOf(j))){
+				r = true;
+			}
+			
+		}
+		
+		return r;
+	}
+	
+	public boolean thisPointRamTrace(Point p){
+		boolean r = false;
+		
+		// getIndexListPt-1 pour ne pas reprendre en compte la tete que l'on compare
+		for (int i=0; i < getIndexListePt()-1; i++){
+			if (p.equals(getPointOf(i))){
+				r = true;
+			}
+			
+		}
+		
+		return r;
+	}
+	
 	//get
+	
+	public Point getLastPoint(){
+		return listePt.get(indexListePt-1);
+	}
+	
+	public Point getPointOf(int i) {
+		return listePt.get(i);
+	}
 	
 	public ArrayList<Point> getListePt(){
 		return listePt;
@@ -39,8 +74,24 @@ public class Trace {
 		return depart;
 	}
 	
-	//set
 	
+	/**
+	 * @return the indexListePt
+	 */
+	public int getIndexListePt() {
+		return indexListePt;
+	}
+
+	//sets
+
+	/**
+	 * @param indexListePt the indexListePt to set
+	 */
+	public void setIndexListePt(int indexListePt) {
+		this.indexListePt = indexListePt;
+	}
+
+
 	public void setListePt(int index, Point pt){
 		listePt.add(index, pt);
 	}
