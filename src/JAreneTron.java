@@ -13,8 +13,8 @@ public class JAreneTron extends JComponent {
 
 	private Graphics2D context;
 	private ArrayList<TronPlayer> players;
-	private int vWidth;
-	private int vHeight;
+	private double vWidth;
+	private double vHeight;
 	private double gWidth;
 	private double gHeight;
 	
@@ -29,17 +29,17 @@ public class JAreneTron extends JComponent {
 		Point temp;
 		
 		//Établissement des mesures de la grille virtuel
+		double ratio;
 		double temp1 =  getWidth()/vWidth;
 		double temp2 =  getHeight()/vHeight;
 		if (temp1 > temp2){
-			this.gWidth = vWidth * temp2;
-			this.gHeight = vHeight * temp2;
+			ratio = temp2;
 		}
 		else{
-			this.gWidth = vWidth * temp1;
-			this.gHeight = vHeight * temp1;
+			ratio = temp1;
 		}
-		
+		this.gWidth = vWidth * ratio;
+		this.gHeight = vHeight * ratio;
 		//Dessine l'arene
 		context.setColor(Color.BLACK);
 		context.fill(new Rectangle2D.Double(0, 0, gWidth, gHeight));
@@ -50,16 +50,22 @@ public class JAreneTron extends JComponent {
 		context.setStroke(oldStroke);
 
 		//Dessine les joueurs
-		
-		System.out.println();
 		for (int i = 0; i < players.size(); i++){
 			for (int j = 0; j < players.get(i).getTracePlayer().getListePt().size(); j++){
 				temp = players.get(i).getTracePlayer().getListePt().get(j);
-				
 				context.setColor(players.get(i).getColorPlayer());
-				context.drawLine(temp.getX(), temp.getY(), temp.getX(), temp.getY());				
+				double pointTempX = temp.getX() * (ratio);
+				double pointTempY = temp.getY() * (ratio);
+				context.draw(new Rectangle2D.Double(pointTempX-(ratio/2), pointTempY-(ratio/2),ratio, ratio));	
+				context.fill(new Rectangle2D.Double(pointTempX-(ratio/2), pointTempY-(ratio/2),ratio, ratio));
 			}
 		}
+	}
+	public void setPlayers(TronPlayer p, int index){
+		players.set(index, p);
+	}
+	public ArrayList<TronPlayer> getPlayers(){
+		return players;
 	}
 }
  

@@ -2,7 +2,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -16,25 +18,27 @@ public class testArenaLocal {
 	private static TronPlayer player2 = new TronPlayer("bleh", "leo", grille);
 	private static JAreneTron arene = new JAreneTron(100,100,tab);
 	private static Color[] color = {Color.BLUE, Color.YELLOW, Color.RED, Color.GREEN, Color.CYAN, Color. GRAY};
+	private static TronClient client;
 	
 	
 	public static void main(String[] args) {
-		BorderLayout layout = new BorderLayout (10,10);
 		
-		for(int i = 0; i < tab.size(); i++){
-			tab.get(i).setColorPlayer(color[i]);
-		}
+		client = new TronClient("yolo", 1337);
+		player1.setColorPlayer(Color.BLUE);
+		player2.setColorPlayer(Color.RED);
+		client.addPlayer(player1);
+		client.addPlayer(player2);
+		client.getPlayers().get(0).getTracePlayer().allonge('N');
+		client.getPlayers().get(0).getTracePlayer().allonge('N');
+		client.getPlayers().get(0).getTracePlayer().allonge('N');
+		client.getPlayers().get(0).getTracePlayer().allonge('N');
+		client.resetPlayerList();
+		
+		//String[] arguments = new String[] {"Yolo 1337"};
+		//client.main(arguments);
+		//Création de la liste de joueur
 
-		tab.add(player1);
-		tab.add(player2);
-		JFrame frame = new JFrame();
-		JPanel pane = new JPanel();
-		pane.setLayout(layout);
-		pane.add(arene, BorderLayout.CENTER);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("test");
-		frame.getContentPane().add(arene);
-		frame.show();
+		
 	}
 
 }

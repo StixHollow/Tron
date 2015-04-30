@@ -4,16 +4,14 @@ public class Point {
 	protected int x;
 	protected int y;
 	
-	public Point (int x, int y, int[][] grille){
+	public Point (int x, int y){
 		this.x = x;
 		this.y = y;
-		grille[x][y] = 0;
 	}
 	
-	public Point (Point pt, int[][] grille){
+	public Point (Point pt){
 		this.x  = pt.getX();
 		this.y = pt.getY();
-		grille[x][y] = 0;
 	}
 	
 	
@@ -50,5 +48,6 @@ public class Point {
 	
 	public void setY(int y){
 		this.y = y;
+		System.out.println(this.y);
 	}
 }

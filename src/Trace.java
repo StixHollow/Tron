@@ -17,16 +17,18 @@ public class Trace {
 	
 	
 	public void allonge(char direction){
+		Point temp = new Point (listePt.get(indexListePt-1).getX(),listePt.get(indexListePt-1).getY());
 		
-		Point temp = listePt.get(indexListePt);
 		switch (direction){
 		
-		case 'N' : temp.setY(temp.getY() - 1);
-		case 'S' : temp.setY(temp.getY() + 1);	   
-		case 'E' : temp.setX(temp.getX() - 1);	
-		case 'O' : temp.setX(temp.getX() + 1);	
+		case 'N' : temp.setY(temp.getY() - 1);break;
+		case 'S' : temp.setY(temp.getY() + 1);break; 
+		case 'E' : temp.setX(temp.getX() - 1);break;
+		case 'O' : temp.setX(temp.getX() + 1);break;	
 		}
 		listePt.add(temp);
+		System.out.println(listePt.get(indexListePt-1).getY() - 1  + " " + temp.getX() + " " + temp.getY());
+		indexListePt++;
 	}
 	
 	public boolean ramTrace(){

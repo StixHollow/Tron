@@ -50,7 +50,7 @@ public class TronPlayer {
 		// initialisation du joueur a vivant
 		Alive = true;
 		
-		tracePlayer = new Trace(this, new Point(posX, posY, grille));
+		tracePlayer = new Trace(this, new Point(posX, posY));
 		
 	}
 	
@@ -127,6 +127,7 @@ public class TronPlayer {
 		line += "	Couleur : " + colorPlayer + "\n";
 		line += "	Direction : " + direction + "\n";
 		line += "	En vie : " + Alive + "\n";
+		line += "   pos: "+ posX + " "+ posY+"\n";
 		
 		return line;
 	}
