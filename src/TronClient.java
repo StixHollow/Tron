@@ -191,7 +191,7 @@ public class TronClient implements KeyListener{
 	
 	public void resetPlayerList(){
 		for (int i = players.size()-1; i >= 0; i--){
-			System.out.println("tattaL");
+
 			players.remove(i);
 		}
 		System.out.println(players.isEmpty());

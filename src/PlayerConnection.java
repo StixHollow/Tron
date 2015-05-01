@@ -187,8 +187,8 @@ public class PlayerConnection extends Thread {
 	 */
 	public void movePlayer(){
 		infoPlayer.getTracePlayer().allonge(infoPlayer.getDirection().charAt(0));
-		System.out.println("Joueur " + idPlayer +  " X : " + infoPlayer.getPosX());
-		System.out.println("Joueur " + idPlayer +  " Y : " + infoPlayer.getPosY());
+		// System.out.println("Joueur " + idPlayer +  " X : " + infoPlayer.getPosX());
+		// System.out.println("Joueur " + idPlayer +  " Y : " + infoPlayer.getPosY());
 	}
 
 	/*

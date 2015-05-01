@@ -194,7 +194,7 @@ public class TronHeartBeat extends Thread {
 				}
 
 			}
-		}, 0, 100); //clocktick
+		}, 0, clocktick); //clocktick
 	}
 	
 	/**
