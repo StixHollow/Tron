@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
+import java.awt.event.KeyListener;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
@@ -17,11 +18,13 @@ public class JAreneTron extends JComponent {
 	private double vHeight;
 	private double gWidth;
 	private double gHeight;
+	private KeyListener listener;
 	
 	public JAreneTron (int width, int height, ArrayList<TronPlayer> players){
 		this.players = players;
 		this.vWidth = width +2;
 		this.vHeight = height +2;
+		setFocusable(true);
 		
 	}
 	protected void paintComponent(Graphics g) {

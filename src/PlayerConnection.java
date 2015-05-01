@@ -90,6 +90,7 @@ public class PlayerConnection extends Thread {
 			// initialisation de la connexion 
 			String name = reception;
 			String host = clientSocket.getInetAddress().getLocalHost().getHostName();
+			System.out.println(server.grille.length + " " + server.grille[0].length);
 			infoPlayer = new TronPlayer(host, name, server.getGrille());
 			infoPlayer.setDirection("N");
 			//infoPlayer.

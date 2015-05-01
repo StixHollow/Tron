@@ -21,7 +21,7 @@ public class TronServer {
 
 	static // Taille de la grille de jeu
 	int gridwidth;
-	static int gridheight;
+	int gridheight;
 	
 	int clocktick;
 	
@@ -32,7 +32,7 @@ public class TronServer {
 
 
 		
-		grille = new int[gridwidth][gridheight];
+		grille = new int[Integer.parseInt(args[1])][Integer.parseInt(args[2])];
 		
 		// test si l'ensemble des parametres sont present
 		// A CORRIGER
@@ -58,9 +58,9 @@ public class TronServer {
 			
 			
 			if (isInt(args[1]) || isInt(args[2]) || isInt(args[3])){
-				server.setGridwidth(Integer.parseInt(args[2]));
-				server.setGridheight(Integer.parseInt(args[3]));
-				server.setClocktick(Integer.parseInt(args[1]));
+				server.setGridwidth(Integer.parseInt(args[1]));
+				server.setGridheight(Integer.parseInt(args[2]));
+				server.setClocktick(Integer.parseInt(args[3]));
 			} else {
 				errorMessage(100);
 			}

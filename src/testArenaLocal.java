@@ -23,20 +23,19 @@ public class testArenaLocal {
 	
 	public static void main(String[] args) {
 		
-		client = new TronClient("yolo", 1337);
-		player1.setColorPlayer(Color.BLUE);
+		
+		client = new TronClient("PC", 1337);
+		/*player1.setColorPlayer(Color.BLUE);
 		player2.setColorPlayer(Color.RED);
 		client.addPlayer(player1);
 		client.addPlayer(player2);
-		client.getPlayers().get(0).getTracePlayer().allonge('N');
-		client.getPlayers().get(0).getTracePlayer().allonge('N');
-		client.getPlayers().get(0).getTracePlayer().allonge('N');
-		client.getPlayers().get(0).getTracePlayer().allonge('N');
-		client.resetPlayerList();
+		client.getPlayers().get(0).getTracePlayer().allonge('N');*/
+
+
 		
-		//String[] arguments = new String[] {"Yolo 1337"};
-		//client.main(arguments);
-		//Création de la liste de joueur
+		
+		
+		
 
 		
 	}

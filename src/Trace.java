@@ -31,13 +31,12 @@ public class Trace {
 		
 		switch (direction){
 		
-		case 'N' : temp.setY(temp.getY() - 1);break;
-		case 'S' : temp.setY(temp.getY() + 1);break; 
-		case 'E' : temp.setX(temp.getX() - 1);break;
-		case 'O' : temp.setX(temp.getX() + 1);break;	
+		case 'N' : case 'n' : temp.setY(temp.getY() - 1);break;
+		case 'S' : case 's' : temp.setY(temp.getY() + 1);break; 
+		case 'E' : case 'e' : temp.setX(temp.getX() + 1);break;
+		case 'W' : case 'w' : temp.setX(temp.getX() - 1);break;	
 		}
 		listePt.add(temp);
-		System.out.println(listePt.get(indexListePt-1).getY() - 1  + " " + temp.getX() + " " + temp.getY());
 		indexListePt++;
 	}
 	

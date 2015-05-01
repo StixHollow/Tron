@@ -28,7 +28,6 @@ public class TronPlayer {
 	 * @param n - nom du joueur
 	 */
 	public TronPlayer(String host, String n, int[][] grille) {
-		
 		setNewPosition(grille);
 		name = n;
 		hostname = host;
@@ -101,15 +100,18 @@ public class TronPlayer {
 
 	public void setNewPosition(int[][] grille){
 		//Genere le point de depart
+		System.out.println(grille.length + " " + grille[0].length);
 				boolean temp = true;
 				int randx = 0;
 				int randy = 0;
 				while (temp) {
 					Random r1 = new Random();
 					Random r2 = new Random();
-
-					randx = r1.nextInt(grille.length - 10) + 10;
-					randy = r2.nextInt(grille[0].length - 10) + 10;
+					
+					//randx = r1.nextInt(grille.length - 10) + 10;
+					//randy = r2.nextInt(grille[0].length - 10) + 10;
+					randx = r1.nextInt(90) + 10;
+					randy = r2.nextInt(90) + 10;
 					if (grille[randx][randy] == 0) {
 						temp = !temp;
 					}
