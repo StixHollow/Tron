@@ -54,6 +54,6 @@ public class Point {
 	
 	public void setY(int y){
 		this.y = y;
-		System.out.println(this.y);
+		
 	}
 }

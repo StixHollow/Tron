@@ -38,6 +38,10 @@ public class Trace {
 		case 'E' : case 'e' : temp.setX(temp.getX() + 1);break;
 		case 'W' : case 'w' : temp.setX(temp.getX() - 1);break;	
 		}
+		
+		player.setPosX(temp.getX());
+		player.setPosY(temp.getY());
+		
 		listePt.add(temp);
 		indexListePt++;
 	}
@@ -87,7 +91,8 @@ public class Trace {
 		if (listePt.get(indexListePt-1).getX() >= sizeX || 
 			listePt.get(indexListePt-1).getY() >= sizeY || 	
 			listePt.get(indexListePt-1).getX() <= 0	    || 
-			listePt.get(indexListePt-1).getY() >= 0    		){
+			listePt.get(indexListePt-1).getY() <= 0    		){
+		
 			return true;
 		} else {return false;}
 		

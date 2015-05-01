@@ -19,6 +19,8 @@ public class TronHeartBeat extends Thread {
 
 	// serveur principal
 	private TronServer server;
+	
+	final static private int tmpWait = 10;
 
 	private int nbConnexion; // nombre du joueur connecter
 	private int nbPlayerAlive; // nombre du joueur vivant
@@ -82,7 +84,7 @@ public class TronHeartBeat extends Thread {
 		while (nbConnexion < 2) {
 
 			try {
-				Thread.sleep(10000);
+				Thread.sleep(tmpWait * 1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -177,6 +179,7 @@ public class TronHeartBeat extends Thread {
 						sendMove();
 						// test s'ils sont en vie
 						whoIsAlive();
+						
 					} else {
 						// fini la partie
 						party = false;
@@ -189,28 +192,32 @@ public class TronHeartBeat extends Thread {
 				}
 
 			}
-		}, 0, clocktick);
+		}, 0, 100); //clocktick
 	}
 	
 	/**
 	 * Restart une partie
 	 */
 	public void restart(){
-		
+		System.out.println("Une nouvelle partie recommance dans " + tmpWait + "sec");
 		// attendre 10 sec
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(tmpWait * 1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		
+		nbPlayerAlive = nbConnexion;
+		
 		// pour chaque joueur
 		for (int i=0; i < nbConnexion; i++){
 			server.getPlayer(i).getInfoPlayer().setNewPosition(server.getGrille()); // nouvelle position
+			server.getPlayer(i).getInfoPlayer().setAlive(true); // il est mort
 			os[i].println("R"); // message de restart
 			server.getPlayer(i).sendPlayers(); // envoi les coordonées de chaques joueurs
 		}
 		// relance le timer
+		
 		startParty();
 	}
 

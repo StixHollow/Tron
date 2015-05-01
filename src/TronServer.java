@@ -61,9 +61,9 @@ public class TronServer {
 			
 			
 			if (isInt(args[1]) || isInt(args[2]) || isInt(args[3])){
-				server.setGridwidth(Integer.parseInt(args[1]));
-				server.setGridheight(Integer.parseInt(args[2]));
-				server.setClocktick(Integer.parseInt(args[3]));
+				server.setGridwidth(Integer.parseInt(args[2]));
+				server.setGridheight(Integer.parseInt(args[3]));
+				server.setClocktick(Integer.parseInt(args[1]));
 			} else {
 				errorMessage(100);
 			}

@@ -23,8 +23,6 @@ public class PlayerConnection extends Thread {
 	// taille de la grille de jeu
 	private int gridwidth = 0;				
 	private int gridheight = 0;
-
-	
 	
 	// Info connexion
 	private Socket clientSocket;
@@ -78,7 +76,6 @@ public class PlayerConnection extends Thread {
 	public void run() {
 		// protocole de communication avec le Client
 		String reception;
-		
 		try { 
 			
 			// recuperation du texte du client
@@ -92,10 +89,12 @@ public class PlayerConnection extends Thread {
 			// initialisation de la connexion 
 			String name = reception;
 			String host = clientSocket.getInetAddress().getLocalHost().getHostName();
-			System.out.println(server.grille.length + " " + server.grille[0].length);
+			//System.out.println(server.grille.length + " " + server.grille[0].length);
 			infoPlayer = new TronPlayer(host, name, server.getGrille());
 			infoPlayer.setDirection("N");
-			infoPlayer.setColorPlayer(color[this.idPlayer]);
+
+			infoPlayer.setColorPlayer(color[idPlayer]);
+
 			//infoPlayer.
 			
 			// envoi des dimension la grille de jeu
@@ -188,6 +187,8 @@ public class PlayerConnection extends Thread {
 	 */
 	public void movePlayer(){
 		infoPlayer.getTracePlayer().allonge(infoPlayer.getDirection().charAt(0));
+		System.out.println("Joueur " + idPlayer +  " X : " + infoPlayer.getPosX());
+		System.out.println("Joueur " + idPlayer +  " Y : " + infoPlayer.getPosY());
 	}
 
 	/*
