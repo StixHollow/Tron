@@ -7,6 +7,7 @@
  * @see TronHeartBeat.java
  */
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,7 +34,8 @@ public class PlayerConnection extends Thread {
 	// serveur du jeu
 	private TronServer server;
 	
-
+	//Couleur des  joueurs
+	private static Color[] color = {Color.BLUE, Color.YELLOW, Color.RED, Color.GREEN, Color.CYAN, Color. GRAY};
 	PlayerConnection(Socket clientSocket, int w, int h, int id, TronServer s) throws ConnectionException {
 		
 		// initialisation des variables
@@ -93,6 +95,7 @@ public class PlayerConnection extends Thread {
 			System.out.println(server.grille.length + " " + server.grille[0].length);
 			infoPlayer = new TronPlayer(host, name, server.getGrille());
 			infoPlayer.setDirection("N");
+			infoPlayer.setColorPlayer(color[this.idPlayer]);
 			//infoPlayer.
 			
 			// envoi des dimension la grille de jeu

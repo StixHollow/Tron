@@ -86,6 +86,7 @@ public class TronClient implements KeyListener{
 	      System.out.println("Grille :  " + answer + " x " + answer2);
 	      System.out.flush();
 	      
+	      
 	      int PlayerArrive = 0;
 	      
 	      do {
@@ -115,6 +116,9 @@ public class TronClient implements KeyListener{
 
 	    //Création de la liste de joueur
 			this.players = new ArrayList<TronPlayer>();
+			while(socket.){
+				
+			}
 			//Création de l'interface graphique
 			//Frame
 			BorderLayout layout = new BorderLayout (10,10);
@@ -145,8 +149,9 @@ public class TronClient implements KeyListener{
 			//Affichage
 			frame.getContentPane().add(pane);
 			frame.show();
+			
 	      do {
-	    	answer = userIn.readLine();
+	    	answer = in.readLine();
 	        System.out.println(answer);
 	        
 	        /*userLine = userIn.readLine();

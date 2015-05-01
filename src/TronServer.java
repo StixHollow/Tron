@@ -7,8 +7,10 @@
  * @see TronHeartBeat.java
  */
 
+import java.awt.Color;
 import java.io.*;
 import java.net.*;
+
 
 public class TronServer {
 
@@ -27,6 +29,7 @@ public class TronServer {
 	
 	//grille virtuel du jeu
 	static int[][] grille;
+	
 	
 	public static void main(String[] args) throws ConnectionException, UnknownHostException {
 
