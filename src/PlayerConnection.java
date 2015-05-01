@@ -104,7 +104,7 @@ public class PlayerConnection extends Thread {
 			os.flush(); 
 			
 			// envoi des informations du joueur aux autres joueurs
-			notifyAllPlayer(); 
+			//notifyAllPlayer(); 
 			
 			// envoi les infos des autres joueurs à ce client
 			sendPlayers();

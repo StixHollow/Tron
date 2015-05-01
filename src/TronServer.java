@@ -32,13 +32,8 @@ public class TronServer {
 	
 	
 	public static void main(String[] args) throws ConnectionException, UnknownHostException {
-
-
 		
-		grille = new int[Integer.parseInt(args[1])][Integer.parseInt(args[2])];
 		
-		// test si l'ensemble des parametres sont present
-		// A CORRIGER
 		if (args.length < 3) {
 			errorMessage(105);
 			System.exit(0);
@@ -64,6 +59,7 @@ public class TronServer {
 				server.setGridwidth(Integer.parseInt(args[2]));
 				server.setGridheight(Integer.parseInt(args[3]));
 				server.setClocktick(Integer.parseInt(args[1]));
+				grille = new int[Integer.parseInt(args[2])][Integer.parseInt(args[3])];
 			} else {
 				errorMessage(100);
 			}

@@ -114,12 +114,10 @@ public class TronClient implements KeyListener{
 	      
 	      String userLine;
 
-	    //Création de la liste de joueur
+	    //Crï¿½ation de la liste de joueur
 			this.players = new ArrayList<TronPlayer>();
-			while(socket.){
-				
-			}
-			//Création de l'interface graphique
+			
+			//Crï¿½ation de l'interface graphique
 			//Frame
 			BorderLayout layout = new BorderLayout (10,10);
 			JFrame frame = new JFrame();
@@ -216,7 +214,7 @@ public class TronClient implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		char c = e.getKeyChar();
 		this.players.get(numJouer).getTracePlayer().allonge(c);
-		System.out.println("Caractère appuyé: "+c); 
+		System.out.println("Caractï¿½re appuyï¿½: "+c); 
 		arene.repaint();
 		
 	}

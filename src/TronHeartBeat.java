@@ -114,6 +114,8 @@ public class TronHeartBeat extends Thread {
 			 */
 			if (p.getTracePlayer().ramBorder()) {
 				server.getPlayer(i).getInfoPlayer().setAlive(false); // il est mort
+				nbPlayerAlive -= 1; 
+
 			}
 			
 			// logiquement si on repasse sur tous les joueurs on reprend le
@@ -124,6 +126,7 @@ public class TronHeartBeat extends Thread {
 				// si la tete touche une partie du cours d'un autre joueur
 				if (otherP.getTracePlayer().thisPointRamTrace (p.getTracePlayer().getLastPoint())) { 					
 					server.getPlayer(i).getInfoPlayer().setAlive(false); // il est mort
+					nbPlayerAlive -= 1;
 				}
 			}
 
@@ -148,7 +151,6 @@ public class TronHeartBeat extends Thread {
 				d = d + String.valueOf(server.getPlayer(i).getInfoPlayer().getDirection());
 			} else {
 				d = d + "X";
-				nbPlayerAlive -= 1;
 			}
 		}
 		System.out.println("s" + d);
@@ -174,7 +176,7 @@ public class TronHeartBeat extends Thread {
 
 				if (party) {
 					// tant qu'il y a des joueurs vivant
-					if (nbPlayerAlive > 0) {
+					if (nbPlayerAlive > 1) {
 						// envoi les directions
 						sendMove();
 						// test s'ils sont en vie
