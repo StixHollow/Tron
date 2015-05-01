@@ -18,6 +18,7 @@ public class TronPlayer {
 	private Color colorPlayer;		// couleur du joueur
 	private Trace tracePlayer;		// trace du joueur
 	private String direction;			// direction actuelle du joueur
+	private int [][] grille;
 	private int posX;				// position du joueur en X
 	private int posY;				// position du joueur en Y
 	private boolean Alive;			// si le joueur est en vie
@@ -27,10 +28,11 @@ public class TronPlayer {
 	 * @param host - nom du host du joueur
 	 * @param n - nom du joueur
 	 */
-	public TronPlayer(String host, String n, int[][] grille) {
-		setNewPosition(grille);
+	public TronPlayer(String host, String n, int[][] g) {
+		setNewPosition(g);
 		name = n;
 		hostname = host;
+		grille = g;
 		// initialisation du joueur a vivant
 		Alive = true;
 		
@@ -96,6 +98,14 @@ public class TronPlayer {
 
 	public void setPosY(int posY) {
 		this.posY = posY;
+	}
+	
+
+	/**
+	 * @return the grille
+	 */
+	public int[][] getGrille() {
+		return grille;
 	}
 
 	public void setNewPosition(int[][] grille){

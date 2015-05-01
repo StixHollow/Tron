@@ -12,12 +12,14 @@ public class Trace {
 	protected ArrayList<Point> listePt;
 	protected int  indexListePt;
 	protected Point depart;
+	protected TronPlayer player;
 	
 	
-	public Trace (TronPlayer player, Point pt){
+	public Trace (TronPlayer p, Point pt){
 		depart = pt;
 		listePt = new ArrayList<Point>();
 		indexListePt = 1;
+		player = p;
 		
 		listePt.add(pt);
 	}
@@ -47,7 +49,7 @@ public class Trace {
 	public boolean ramTrace(){
 		boolean r = false;
 		
-		for (int j=0; j < getIndexListePt(); j++){
+		for (int j=0; j < getIndexListePt()-1; j++){
 			if (getLastPoint().equals(getPointOf(j))){
 				r = true;
 			}
@@ -75,6 +77,20 @@ public class Trace {
 		}
 		
 		return r;
+	}
+	
+	public boolean ramBorder() {
+		
+		int sizeX = player.getGrille().length;
+		int sizeY = player.getGrille()[0].length;
+		
+		if (listePt.get(indexListePt-1).getX() >= sizeX || 
+			listePt.get(indexListePt-1).getY() >= sizeY || 	
+			listePt.get(indexListePt-1).getX() <= 0	    || 
+			listePt.get(indexListePt-1).getY() >= 0    		){
+			return true;
+		} else {return false;}
+		
 	}
 	
 	//get

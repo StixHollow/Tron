@@ -132,7 +132,7 @@ public class PlayerConnection extends Thread {
 	/**
 	 * envoi des joueurs deja connecte au client
 	 */
-	public void sendPlayers(){
+	public synchronized void sendPlayers(){
 		
 		// envoi de chaque client de la liste de joueur au client
 		for (int i = 0; i <= server.getNbPlayers()-1; i++){

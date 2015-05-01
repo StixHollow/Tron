@@ -110,7 +110,10 @@ public class TronHeartBeat extends Thread {
 			 * if (p.getTracePlayer().ramTrace()){
 			 * server.getPlayer(i).getInfoPlayer().setAlive(false); }
 			 */
-
+			if (p.getTracePlayer().ramBorder()) {
+				server.getPlayer(i).getInfoPlayer().setAlive(false); // il est mort
+			}
+			
 			// logiquement si on repasse sur tous les joueurs on reprend le
 			// joueur en cours en compte
 			for (int k = 0; k < nbConnexion; k++) {
