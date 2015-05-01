@@ -1,3 +1,12 @@
+/**
+ * Classe de gestion du client
+ * 
+ * @author Leo Marti & Patrice Wilhelmy
+ * @version 1.1
+ * @see PlayerConnection.java
+ * @see TronHeartBeat.java
+ */
+
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

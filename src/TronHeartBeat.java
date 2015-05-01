@@ -2,7 +2,7 @@
  * Classe de structure du profil du joueur
  * 
  * @author Leo Marti & Patrice Wilhelmy
- * @version 1.0
+ * @version 1.1
  * @see PlayerConnection.java
  * @see TronHeartBeat.java
  */
