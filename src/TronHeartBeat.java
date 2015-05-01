@@ -169,7 +169,7 @@ public class TronHeartBeat extends Thread {
 	public void startParty() {
 		party = true;
 		// creation du tick horloge
-		Timer timer = new Timer();
+		final Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
