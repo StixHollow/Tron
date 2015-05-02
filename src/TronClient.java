@@ -8,6 +8,7 @@
  */
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
@@ -29,14 +30,14 @@ public class TronClient implements KeyListener{
 	
 	JAreneTron arene;
 	JPanel pane, pane2;
-	int gridwidth = 100;
-	int gridheight = 100;
+	int gridwidth ;
+	int gridheight ;
 	int numJouer = 0;
 	private ArrayList<TronPlayer> players;
 	static TronClient client;
 	int port;
 	String address;
-	
+	int[][] grille;
 	public static void main(String[] args) {
 		if (args.length!=2) {
 		      System.out.println("Usage: java Client <hostname> <port>");
@@ -95,37 +96,30 @@ public class TronClient implements KeyListener{
 	      System.out.println("Grille :  " + answer + " x " + answer2);
 	      System.out.flush();
 	      
-	      
-	      int PlayerArrive = 0;
-	      
-	      do {
-	    	  answer = in.readLine();
-	    	  if (answer.substring(0, 1).equals("+")) {
-	    		  PlayerArrive = 5;
-	    	  }
-	    	  System.out.println(answer);
-	    	  PlayerArrive -= 1;
-	      } while (PlayerArrive != 0);
-	      
-	      
-
 	      if (answer==null) {
-	        System.out.println("Reponse etrange du serveur: " + answer);
-	        System.exit(1);
-	      } else {
-	        System.out.println("Protocole de communication OK");
-	        System.out.flush();
-	      }
+		        System.out.println("Reponse etrange du serveur: " + answer);
+		        System.exit(1);
+		      } else {
+		        System.out.println("Protocole de communication OK");
+		        System.out.flush();
+		      }
 
-	      // obtenir un stream du standard input
-	      BufferedReader userIn = 
-	        new BufferedReader(new InputStreamReader(System.in));
-	      
-	      String userLine;
-
-	    //Cr�ation de la liste de joueur
+		      // obtenir un stream du standard input
+		      BufferedReader userIn = 
+		        new BufferedReader(new InputStreamReader(System.in));
+		      
+		      String userLine;
+		      
+	      gridwidth = Integer.parseInt(answer);
+	  	  gridheight = Integer.parseInt(answer2);
+	  	  
+	  	 //Cr�ation de la liste de joueur
 			this.players = new ArrayList<TronPlayer>();
-			
+	      int PlayerArrive = 0;
+	      grille = new int[gridwidth][gridheight];
+	      
+	      String temp1="",temp2="",temp3="",temp4="",temp5 = "";
+	     
 			//Cr�ation de l'interface graphique
 			//Frame
 			BorderLayout layout = new BorderLayout (10,10);
@@ -158,21 +152,44 @@ public class TronClient implements KeyListener{
 			frame.show();
 			
 	      do {
-	    	answer = in.readLine();
-	        System.out.println(answer);
-	        
-	        /*userLine = userIn.readLine();
-	        if (userLine==null) break;
-	        System.out.println("->wait for answer from server");
-	        System.out.flush();
-	        out.println(userLine);
-	        out.flush();
-	        answer = in.readLine();
-	        System.out.println("ANSWER FROM SERVER: "+answer);
-	        System.out.flush();*/
-	      } while (true);
+	    	
+		    	  answer = in.readLine();
+		    	  if (answer.substring(0, 1).equals("+")) {
+		    		  PlayerArrive = 5;
+		    		  while(PlayerArrive >0){
+		    			  
+		    			  System.out.println(answer);
+				    	  
+				    	  PlayerArrive -= 1;
+				    	  switch(PlayerArrive){
+				    	  case 4 : temp1 = answer;break;
+				    	  case 3 : temp2 = answer;break;
+				    	  case 2 : temp3 = answer;break;
+				    	  case 1 : temp4 = answer;break;
+				    	  case 0 : {temp5 = answer;
+				    	  			//players.add(new TronPlayer(temp1,temp2,grille, Integer.parseInt(temp3),Integer.parseInt(temp4)));
 
+				    	  			addPlayer(new TronPlayer(temp1,temp2,grille, Integer.parseInt(temp4),Integer.parseInt(temp5)));
+				    	  			players.get(numJouer).setColorPlayer(Color.decode(temp3));
+				    	  			numJouer++;
+				    	  			arene.repaint();
+				    	  			break;}
+				    	 }
+				    	  answer = in.readLine();
+		    		  }
+	
+		    		  if (answer.substring(0, 1).equals("s"))  {
+		    			  for(int i = 1; i < answer.length();i++){
+		    				  arene.getPlayers().get(i-1).getTracePlayer().allonge(answer.charAt(i));
+		    			  }
+		    			  arene.repaint();
+		    		  }
+	      } 
+		    	  
+	    }while (true);
 	    }
+
+	    
 	    catch (IOException e) { // pour TRY PROTOCOLE
 	      System.err.println("Exception: I/O error trying to talk to server: "
 	                         + e);
@@ -182,11 +199,12 @@ public class TronClient implements KeyListener{
 	}
 	
 	public void addPlayer(TronPlayer e){
-		players.add(e);
 		arene.getPlayers().add(e);
 		JLabel label = new JLabel(e.getName());
 		label.setForeground(e.getColorPlayer());
 		pane2.add(label);
+		pane2.repaint();
+		arene.repaint();
 	}
 	
 	public void resetPlayerList(){
@@ -222,7 +240,7 @@ public class TronClient implements KeyListener{
 	@Override
 	public void keyTyped(KeyEvent e) {
 		char c = e.getKeyChar();
-		this.players.get(numJouer).getTracePlayer().allonge(c);
+		this.players.get(numJouer).setDirection(""+c);
 		System.out.println("Caract�re appuy�: "+c); 
 		arene.repaint();
 		

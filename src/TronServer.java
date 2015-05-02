@@ -106,6 +106,7 @@ public class TronServer {
 				System.out.flush();
 
 			} catch (IOException e) {
+				
 				System.err.println("Exception lancee par ServerSocket.accept: "
 						+ e);
 				System.exit(1);

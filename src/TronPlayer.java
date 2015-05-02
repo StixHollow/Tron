@@ -41,7 +41,18 @@ public class TronPlayer {
 		tracePlayer = new Trace(this, new Point(posX, posY));
 
 	}
+	public TronPlayer(String host, String n, int[][]g, int x, int y) {
+		posX = x;
+		posY = y;
+		name = n;
+		hostname = host;
+		grille = g;
+		// initialisation du joueur a vivant
+		Alive = true;
 
+		tracePlayer = new Trace(this, new Point(posX, posY));
+
+	}
 	/*
 	 * Getter et Setter
 	 */
@@ -132,8 +143,6 @@ public class TronPlayer {
 
 			randx = r1.nextInt(grille.length - 10) + 10;
 			randy = r2.nextInt(grille[0].length - 10) + 10;
-			// randx = r1.nextInt(90) + 10;
-			// randy = r2.nextInt(90) + 10;
 			if (grille[randx][randy] == 0) {
 				temp = !temp;
 			}

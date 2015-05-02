@@ -41,7 +41,6 @@ public class Trace {
 		
 		player.setPosX(temp.getX());
 		player.setPosY(temp.getY());
-		
 		listePt.add(temp);
 		indexListePt++;
 	}

@@ -35,6 +35,7 @@ public class JAreneTron extends JComponent {
 		double ratio;
 		double temp1 =  getWidth()/vWidth;
 		double temp2 =  getHeight()/vHeight;
+		
 		if (temp1 > temp2){
 			ratio = temp2;
 		}
@@ -43,6 +44,7 @@ public class JAreneTron extends JComponent {
 		}
 		this.gWidth = vWidth * ratio;
 		this.gHeight = vHeight * ratio;
+
 		//Dessine l'arene
 		context.setColor(Color.BLACK);
 		context.fill(new Rectangle2D.Double(0, 0, gWidth, gHeight));

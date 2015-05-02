@@ -104,7 +104,7 @@ public class PlayerConnection extends Thread {
 			os.flush(); 
 			
 			// envoi des informations du joueur aux autres joueurs
-			//notifyAllPlayer(); 
+			notifyAllPlayer(); 
 			
 			// envoi les infos des autres joueurs à ce client
 			sendPlayers();
@@ -137,13 +137,13 @@ public class PlayerConnection extends Thread {
 	public synchronized void sendPlayers(){
 		
 		// envoi de chaque client de la liste de joueur au client
-		for (int i = 0; i <= server.getNbPlayers()-1; i++){
+		for (int i = server.getNbPlayers()-1; i >= 0; i--){
 			// Info : nom, host, color, position x et y
 			os.println("+" + server.getPlayer(i).getInfoPlayer().getName());
 			os.flush(); 
 			os.println(server.getPlayer(i).getInfoPlayer().getHostname());
 			os.flush(); 
-			os.println(server.getPlayer(i).getInfoPlayer().getColorPlayer());
+			os.println(server.getPlayer(i).getInfoPlayer().getColorPlayer().getRGB());
 			os.flush(); 
 			os.println(server.getPlayer(i).getInfoPlayer().getPosX());
 			os.flush(); 
@@ -164,7 +164,7 @@ public class PlayerConnection extends Thread {
 		os.flush(); 
 		os.println(server.getPlayer(nb).getInfoPlayer().getHostname());
 		os.flush(); 
-		os.println(server.getPlayer(nb).getInfoPlayer().getColorPlayer());
+		os.println(server.getPlayer(nb).getInfoPlayer().getColorPlayer().getRGB());
 		os.flush(); 
 		os.println(server.getPlayer(nb).getInfoPlayer().getPosX());
 		os.flush(); 
@@ -187,8 +187,6 @@ public class PlayerConnection extends Thread {
 	 */
 	public void movePlayer(){
 		infoPlayer.getTracePlayer().allonge(infoPlayer.getDirection().charAt(0));
-		// System.out.println("Joueur " + idPlayer +  " X : " + infoPlayer.getPosX());
-		// System.out.println("Joueur " + idPlayer +  " Y : " + infoPlayer.getPosY());
 	}
 
 	/*
